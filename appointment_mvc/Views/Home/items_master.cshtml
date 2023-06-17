@@ -14,71 +14,210 @@
 
 
 <div class="container-fluid" style="margin-top:66px;">
-    <div class="section-first candidate_info  mt-2 pt-1 p-3 ">
-        <!-- row -->
-        <div class="row text-center ">
-            <div class="col">
-                <Label ID="Label141" class="col-form-labe sub-head" style="margin-bottom:20px;">Items Details</Label>
-            </div>
-        </div>
-        <!-- row -->
-        <!-- row -->
-        <div class="row mb-1 section-box">
-            <div class="col-lg-3 input-box-section">
-                <div class="lbl">
-                    <label class="col-lg-2 lbl">Item Name</label>
-                </div>
-                <input type="text" id="item_name" class="form-control" value="@Model.item_name">
-            </div>
+	<div class="section-first candidate_info  mt-2 pt-1 p-3 ">
+		<!-- row -->
+		<div class="row text-center ">
+			<div class="col">
+				<Label ID="Label141" class="col-form-labe sub-head" style="margin-bottom:20px;">Items Details</Label>
+			</div>
+		</div>
+		<!-- row -->
+		<!-- row -->
+		<div class="row mb-1 section-box">
+			<div class="col-lg-3 input-box-section">
+				<div class="lbl">
+					<label class="col-lg-2 lbl">Item Name</label>
+				</div>
+				<input type="text" id="item_name" class="form-control" value="@Model.item_name">
+			</div>
 
-            <div class="col-lg-3 input-box-section">
+			<div class="col-lg-3 input-box-section">
 
-                <div class="lbl">
-                    <label class="col-lg-2 lbl">item_code</label>
-                </div>
-                <input type="text" id="item_code" class="form-control" value="@Model.item_code">
-            </div>
-        </div>
+				<div class="lbl">
+					<label class="col-lg-2 lbl">item_code</label>
+				</div>
+				<input type="text" id="item_code" class="form-control" value="@Model.item_code">
+			</div>
+		
+			<div class="col-lg-3 input-box-section">
+				<div class="lbl">
+					<label class="col-lg-2 lbl">Item Price </label>
+				</div>
+				<input type="text" id="item_price" class="form-control" value="@Model.item_price">
+			</div>
 
-        <div class="row mb-1 section-box">
-            <div class="col-lg-3 input-box-section">
-                <div class="lbl">
-                    <label class="col-lg-2 lbl">Item Price </label>
-                </div>
-                <input type="text" id="item_price" class="form-control" value="@Model.item_price">
-            </div>
+			<div class="col-lg-3 input-box-section">
+				<div class="lbl">
+					<label class="col-lg-2 lbl">Item Category</label>
+				</div>
+				<select id="item_category" class="form-control">
+					<option value="1">category 1</option>
+					<option value="2">category 2</option>
+					<option value="3">category 3</option>
+					<option value="4">category 4</option>
 
-            <div class="col-lg-3 input-box-section">
-                <div class="lbl">
-                    <label class="col-lg-2 lbl">Item Category</label>
-                </div>
-                <select id="item_category" class="form-control" >
-                    <option value="1">category 1</option>
-                    <option value="2">category 2</option>
-                    <option value="3">category 3</option>
-                    <option value="4">category 4</option>
+				</select>
+			</div>
 
-                </select>
-            </div>
 
-           
-        </div>
+		</div>
 
-      
+		<div class="row text-center mb-1 mt-3">
+			<div class="col">
+				<button type="button" id="submitBtn" class="btn btn-success">Add Item</button>
+			</div>
+		</div>
 
-        <div class="row mb-1 mt-3">
-            <div class="col">
-                <button type="button" id="submitBtn" class="btn btn-success">Add Item</button>
-            </div>
-        </div>
+		<div class="row mb-1 section-box">
 
-    </div>
+			@if (Model.part_list != null && Model.part_list.Count > 0)
+			{
+				<div class="row mb-1">
+					<div class="col-md-4">
+						<label class="lbl">Parts List</label>
+					</div>
+				</div>
+				<div class="row mb-1" style="padding: 15px 15px;">
+					<table class="styled-table"  id="table11">
+						<thead>
+							<tr>
+								<th>Part Code</th>
+								<th>Part Name</th>
+
+								<th>Part Rate</th>
+
+								<th>Category</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody id="table_body1">
+							@foreach (var item in Model.part_list)
+							{
+								<tr>
+									<td>@item.part_code</td>
+									<td>@item.part_name</td>
+									<td>@item.part_rate</td>
+									<td>@item.part_cat</td>
+									<td>
+										<a href="#" class="delete-link">Delete</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					<p id="vall"></p>
+				</div>
+			}
+		</div>
+
+
+
+
+
+	</div>
+
+	<div class="section-first candidate_info  mt-2 pt-1 p-3 ">
+		<!-- row -->
+		<div class="row text-center ">
+			<div class="col">
+				<Label ID="Label141" class="col-form-labe sub-head" style="margin-bottom:20px;">Manpower Details</Label>
+			</div>
+		</div>
+		<!-- row -->
+		<!-- row -->
+		<div class="row mb-1 section-box">
+			<div class="col-lg-3 input-box-section">
+				<div class="lbl">
+					<label class="col-lg-2 lbl">Employee Name</label>
+				</div>
+				<input type="text" id="employee_name" class="form-control" value="@Model.item_price">
+			</div>
+
+			<div class="col-lg-3 input-box-section">
+
+				<div class="lbl">
+					<label class="col-lg-2 lbl">Employee Code</label>
+				</div>
+				<input type="text" id="employee_code" class="form-control" value="@Model.item_price">
+			</div>
+		
+			<div class="col-lg-3 input-box-section">
+				<div class="lbl">
+					<label class="col-lg-2 lbl">Employee Price </label>
+				</div>
+				<input type="text" id="employee_price" class="form-control" value="@Model.item_price">
+			</div>
+
+			<div class="col-lg-3 input-box-section">
+				<div class="lbl">
+					<label class="col-lg-2 lbl">Employee Category</label>
+				</div>
+				<select id="employee_category" class="form-control">
+					<option value="1">category 1</option>
+					<option value="2">category 2</option>
+					<option value="3">category 3</option>
+					<option value="4">category 4</option>
+
+				</select>
+			</div>
+
+
+		</div>
+
+
+
+		<div class="row text-center mb-1 mt-3">
+			<div class="col">
+				<button type="button" id="addemp" class="btn btn-success">Add Employee</button>
+			</div>
+		</div>
+
+		<div class="row mb-1 section-box">
+
+			@if (Model.labr_list1 != null && Model.labr_list1.Count > 0)
+			{
+				<div class="row mb-1">
+					<div class="col-md-4">
+						<label class="lbl">Manpower List</label>
+					</div>
+				</div>
+				<div class="row mb-1" style="padding: 15px 15px;">
+					<table class="styled-table" id="table11">
+						<thead>
+							<tr>
+								<th>Part Code</th>
+								<th>Part Name</th>
+								<th>Part Rate</th>
+								<th>Category</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody id="table_body1">
+							@foreach (var item in Model.labr_list1)
+							{
+								<tr>
+									<td>@item.labr_code</td>
+									<td>@item.labr_name1</td>
+									<td>@item.labr_rate</td>
+									<td>@item.labr_cat</td>
+									<td>
+										<a href="#" class="delete-link">Delete</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					<p id="vall"></p>
+				</div>
+			}
+		</div>
+
+	</div>
 </div>
 <script>
-	// Get a reference to the submit button
+	
 	var submitBtn = document.getElementById('submitBtn');
 
-	// Add a click event listener to the submit button
 	submitBtn.addEventListener('click', function () {
 		// Get the input field values
         var item_name = document.getElementById('item_name').value;
@@ -87,7 +226,6 @@
         var item_price = document.getElementById('item_price').value;
 	
 
-		// Create an object to hold the data
 		var data = {
 			item_name: item_name,
 			item_code: item_code,
@@ -99,6 +237,55 @@
 		// Send the data to the controller using AJAX
 		var xhr = new XMLHttpRequest();
         xhr.open('POST', '/home/item_add_button', true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+				// Handle the response from the controller if needed
+				var response = JSON.parse(xhr.responseText);
+				if (response.success) {
+					// Show SweetAlert success notification
+					Swal.fire({
+						icon: 'success',
+						title: 'Success!',
+						text: 'Item Added  Successfully '
+					});
+				} else {
+					// Show SweetAlert error notification
+					Swal.fire({
+						icon: 'error',
+						title: 'Error!',
+						text: 'Failed to submit data.'
+					});
+				}
+			}
+		};
+		xhr.send(JSON.stringify(data));
+	});
+</script>
+
+<script>
+
+	var submitBtn = document.getElementById('addemp');
+
+	submitBtn.addEventListener('click', function () {
+		// Get the input field values
+		var item_name = document.getElementById('employee_name').value;
+		var item_code = document.getElementById('employee_code').value;
+		var item_category = document.getElementById('employee_category').value;
+		var item_price = document.getElementById('employee_price').value;
+
+
+		var data = {
+			item_name: item_name,
+			item_code: item_code,
+			item_category: item_category,
+			item_price: item_price,
+
+		};
+
+		// Send the data to the controller using AJAX
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', '/home/employee_add_button', true);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {

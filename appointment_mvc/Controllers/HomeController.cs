@@ -1496,26 +1496,69 @@ namespace appointment_mvc.Controllers
         }
 
         //Master Manager
-        public ActionResult items_master(String user_id)
+        public ActionResult items_master()
         {
-            appointment_mvc.Models.items_master items_master = new appointment_mvc.Models.items_master();
+            items_master model = new items_master();
+            // Populate the model with the necessary data
+            model.part_list = new List<part_list>();
+            model.labr_list1 = new List<labr_list1>();
+
+            string query = "select * from workshop_parts where comp_code='1'";
+            string query1 = "select * from workshop_labr where comp_code='1'";
 
 
+            using (var reader = SqlHelper.ExecuteReader(CommandType.Text, query))
+            {
+                while (reader.Read())
+                {
+                    part_list jobCard = new part_list();
+                    jobCard.part_code = reader["part_code"].ToString();
+                    jobCard.part_name = reader["part_name"].ToString();
+                    jobCard.part_rate = reader["part_rate"].ToString();
+                    jobCard.part_cat = reader["part_catg"].ToString();
 
-            return View(items_master);
+                    model.part_list.Add(jobCard);
+                }
+            }
+
+            using (var reader = SqlHelper.ExecuteReader(CommandType.Text, query1))
+            {
+                while (reader.Read())
+                {
+                    labr_list1 jobCard1 = new labr_list1();
+                    jobCard1.labr_code = reader["labr_code"].ToString();
+                    jobCard1.labr_name1 = reader["labr_name"].ToString();
+                    jobCard1.labr_rate = reader["labr_rate"].ToString();
+                    jobCard1.labr_cat = reader["labr_catg"].ToString();
+
+                    model.labr_list1.Add(jobCard1);
+                }
+            }
+
+            return View(model);
+
         }
 
         // POST: YourController/handlesubmit_items
         [HttpPost]
         public ActionResult item_add_button(items_master model)
         {
-            //string username = model.item_name;
-            //string password = model.item_code;
+            
+            string insert = "insert into workshop_parts (comp_code,part_code,part_name,part_rate,part_catg,export_type) values ('1','"+model.item_code+"','" + model.item_name + "','" + model.item_price + "','" + model.item_category + "','1')";
 
-            //string str = "Select user_code from user_cloud where  user_name='" + username + "' and user_pass='" + password + "' and isactive='Y' and export_type < 3";
-            //object item_st = SqlHelper.ExecuteScalar(CommandType.Text, str);
+            SqlHelper.ExecuteNonQuery(CommandType.Text, insert);
 
-            string insert = "insert into workshop_parts (comp_code,part_code,part_name,part_rate,part_catg,export_type) values ('1','"+model.item_code+"','" + model.item_name + "','" + model.item_price + "','" + model.item_price + "','1')";
+
+            return Json(new { success = true });
+        }
+
+        // POST: YourController/handlesubmit_items
+        [HttpPost]
+        public ActionResult employee_add_button(items_master model)
+        {
+           
+
+            string insert = "insert into workshop_labr (comp_code,labr_code,labr_name,labr_rate,labr_catg,export_type) values ('1','" + model.item_code + "','" + model.item_name + "','" + model.item_price + "','" + model.item_category + "','1')";
 
             SqlHelper.ExecuteNonQuery(CommandType.Text, insert);
 
