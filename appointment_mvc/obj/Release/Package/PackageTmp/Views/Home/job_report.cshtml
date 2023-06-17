@@ -1,0 +1,133 @@
+﻿@model List<appointment_mvc.Models.report>
+@{
+	ViewBag.Title = "job_report";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<style>
+
+	form {
+		overflow: hidden;
+	}
+
+	.sub-head {
+		font-size: 24px;
+		color: black;
+		font-weight: bold;
+	}
+
+	.candidate_info {
+		box-shadow: 0px 0px 17px -2px rgba(0,0,0,0.55);
+		background: #cde7cd;
+		border-radius: 8px;
+	}
+
+	.btn {
+		background-color: #529352e3;
+		border: none;
+		padding: 2px;
+	}
+
+		.btn:hover {
+			background-color: #7bad7be3;
+		}
+
+	.navbar {
+		/* display:none;*/
+	}
+
+
+
+	.styled-table {
+		border-collapse: collapse;
+		margin: 25px 0;
+		font-size: 0.9em;
+		font-family: sans-serif;
+		min-width: 400px;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	}
+
+		.styled-table thead tr {
+			background-color: #009879;
+			color: #ffffff;
+			text-align: left;
+		}
+
+		.styled-table th,
+		.styled-table td {
+			padding: 12px 15px;
+		}
+
+		.styled-table tbody tr {
+			border-bottom: 1px solid #dddddd;
+		}
+
+			.styled-table tbody tr:nth-of-type(even) {
+				background-color: #f3f3f3;
+			}
+
+			.styled-table tbody tr:last-of-type {
+				border-bottom: 2px solid #009879;
+			}
+
+			.styled-table tbody tr.active-row {
+				font-weight: bold;
+				color: #009879;
+			}
+
+	table {
+		width: 100%;
+		margin-left: -50px;
+	}
+
+	.container-fluid {
+		margin-top: 95px !important;
+	}
+</style>
+
+
+<div class="container-fluid" style="margin-top:40px;">
+	<div class="section-first candidate_info mb-2 mt-2 pt-1 p-3 ">
+		<!-- row -->
+		<div class="row text-center mb-1">
+			<div class="col">
+				<Label ID="Label141" class="col-form-labe sub-head" style="margin-bottom:20px;">Job-Card Details</Label>
+			</div>
+		</div>
+		<!-- row -->
+		<!-- row -->
+		<div class="">
+			<table class="styled-table" style="table-layout:fixed; width:100%;" id="table">
+				<thead>
+					<tr>
+						<th>Job Card No.</th>
+						<th>Veh. No.</th>
+						<th>Customer Name</th>
+						<th>Receipt Amount</th>
+						<th>Visit Date</th>
+						<th>Status</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var jobCard in Model)
+					{
+						<tr>
+							<td>@jobCard.JobCardNo</td>
+							<td>@jobCard.VehicleNo</td>
+							<td>@jobCard.CustomerName</td>
+							<td>@jobCard.ReceiptAmount</td>
+							<td>@jobCard.VisitDate</td>
+							<td>@jobCard.Status</td>
+							<td>Action</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
