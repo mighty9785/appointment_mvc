@@ -87,7 +87,7 @@
 								<th>Part Rate</th>
 
 								<th>Category</th>
-								<th>Action</th>
+								@*<th>Action</th>*@
 							</tr>
 						</thead>
 						<tbody id="table_body1">
@@ -98,9 +98,9 @@
 									<td>@item.part_name</td>
 									<td>@item.part_rate</td>
 									<td>@item.part_cat</td>
-									<td>
+									@*<td>
 										<a href="#" class="delete-link">Delete</a>
-									</td>
+									</td>*@
 								</tr>
 							}
 						</tbody>
@@ -189,7 +189,7 @@
 								<th>Part Name</th>
 								<th>Part Rate</th>
 								<th>Category</th>
-								<th>Action</th>
+								@*<th>Action</th>*@
 							</tr>
 						</thead>
 						<tbody id="table_body1">
@@ -200,9 +200,9 @@
 									<td>@item.labr_name1</td>
 									<td>@item.labr_rate</td>
 									<td>@item.labr_cat</td>
-									<td>
+									@*<td>
 										<a href="#" class="delete-link">Delete</a>
-									</td>
+									</td>*@
 								</tr>
 							}
 						</tbody>
@@ -247,7 +247,10 @@
 					Swal.fire({
 						icon: 'success',
 						title: 'Success!',
-						text: 'Item Added  Successfully '
+						text: 'Item Added Successfully'
+					}).then(function () {
+						// Reload the page
+						location.reload();
 					});
 				} else {
 					// Show SweetAlert error notification
@@ -296,7 +299,10 @@
 					Swal.fire({
 						icon: 'success',
 						title: 'Success!',
-						text: 'Item Added  Successfully '
+						text: 'Employee Added Successfully'
+					}).then(function () {
+						// Reload the page
+						location.reload();
 					});
 				} else {
 					// Show SweetAlert error notification

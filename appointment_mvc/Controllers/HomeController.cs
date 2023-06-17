@@ -1543,14 +1543,39 @@ namespace appointment_mvc.Controllers
         [HttpPost]
         public ActionResult item_add_button(items_master model)
         {
-            
-            string insert = "insert into workshop_parts (comp_code,part_code,part_name,part_rate,part_catg,export_type) values ('1','"+model.item_code+"','" + model.item_name + "','" + model.item_price + "','" + model.item_category + "','1')";
-
+            string insert = "insert into workshop_parts (comp_code,part_code,part_name,part_rate,part_catg,export_type) values ('1','" + model.item_code + "','" + model.item_name + "','" + model.item_price + "','" + model.item_category + "','1')";
             SqlHelper.ExecuteNonQuery(CommandType.Text, insert);
 
+            // Retrieve the updated list of items from the database
+            List<itemNO_list> updatedItemList = new List<itemNO_list>();
+            string item_st = "select part_code, part_code, part_name, part_rate from workshop_parts";
+            DataSet dts = SqlHelper.ExecuteDataset(CommandType.Text, item_st);
+            if (dts.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dts.Tables[0].Rows)
+                {
+                    updatedItemList.Add(new Models.itemNO_list()
+                    {
+                        item_code = dr["part_code"].ToString(),
+                        part_no = dr["part_code"].ToString(),
+                        part_name = dr["part_name"].ToString(),
+                        per_rate = dr["part_rate"].ToString()
+                    });
+                }
+            }
+
+            string path = System.Configuration.ConfigurationManager.AppSettings["importantfile"].ToString();
+            string jsonFilePath = path + "itemNO_list.json";
+
+            // Convert the updated list to JSON
+            string json = JsonConvert.SerializeObject(updatedItemList);
+
+            // Write the JSON data back to the file
+            System.IO.File.WriteAllText(jsonFilePath, json);
 
             return Json(new { success = true });
         }
+
 
         // POST: YourController/handlesubmit_items
         [HttpPost]
